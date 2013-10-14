@@ -9,7 +9,7 @@ public class Player:MonoBehaviour {
 	
 	void FixedUpdate() {
 		Vector3 speed = new Vector3(0, rigidbody.velocity.y - 1, 0);
-		
+			
 		if(Input.GetKey("d")) {
 			if(!onGround) {
 				speed.x = walkSpeed / 2;
@@ -30,11 +30,19 @@ public class Player:MonoBehaviour {
 		}
 		
 		rigidbody.velocity = speed;
+		
+		Debug.Log (onGround);
 	}
 	
-	void OnCollisionEnter(Collision collision) {
+	void OnCollisionStay(Collision collision) {
 		if(collision.contacts[0].normal.y > 0.7f) {
-			onGround = true;
+			if(collision.collider.name == "Floor") {
+				onGround = true;
+			}
 		}
+	}
+	
+	void OnCollisionExit(Collision collision) {
+		onGround = false;
 	}
 }
