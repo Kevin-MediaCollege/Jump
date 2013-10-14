@@ -30,8 +30,6 @@ public class Player:MonoBehaviour {
 		}
 		
 		rigidbody.velocity = speed;
-		
-		Debug.Log (onGround);
 	}
 	
 	void OnCollisionStay(Collision collision) {
