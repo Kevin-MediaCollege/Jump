@@ -18,7 +18,7 @@ public class Player:MonoBehaviour {
 	private float endY;
 	
 	private GameObject[] lines;
-	private int maxlines = 5;
+	private int maxlines = 3;
 	
 	private int animpos;
 	
@@ -80,6 +80,11 @@ public class Player:MonoBehaviour {
 			}
 			
 			float distance = getDistance(startX, startY, endX, endY);
+			if(distance > 10f)
+			{
+				distance = 10f;
+			}	
+			
 			float degree = getDegreeFromPoint(startX, startY, endX, endY);
 			float newX = getNextX(startX, degree, distance / 2f);
 			float newY = getNextY(startY, degree, distance / 2f);
