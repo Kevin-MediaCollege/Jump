@@ -9,7 +9,8 @@ public class Arrow:MonoBehaviour {
 	}
 	
 	void FixedUpdate() {
-		rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
+		transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, -90, transform.rotation.w);
+		rigidbody.velocity = new Vector3(-moveSpeed, 0, 0);
 	}
 	
 	void OnCollisionEnter(Collision collision) {		
@@ -17,5 +18,7 @@ public class Arrow:MonoBehaviour {
 			Destroy(collision.collider.gameObject);
 			Application.LoadLevel(0);
 		}
+		
+		//Destroy(gameObject);
 	}
 }
