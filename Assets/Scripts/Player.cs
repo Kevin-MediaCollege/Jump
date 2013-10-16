@@ -44,8 +44,7 @@ public class Player:MonoBehaviour {
 			lines[maxlines] = line;
 			Destroy(lines[0]);
 			
-			for(int i = 1; i < maxlines + 1; i++)
-			{
+			for(int i = 1; i < maxlines + 1; i++) {
 				lines[i - 1] = lines[i];
 			}
 			

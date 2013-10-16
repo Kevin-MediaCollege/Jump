@@ -6,6 +6,10 @@ public class TrapBall:MonoBehaviour {
 	
 	private int rollingSpeed = 5;
 	private bool onGround;
+	
+	void Start() {
+		gameObject.name = "TrapBall";	
+	}
 		
 	void FixedUpdate() {
 		Vector3 speed = new Vector3(0, rigidbody.velocity.y - 1, 0);

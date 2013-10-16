@@ -15,7 +15,7 @@ public class PressurePlate:MonoBehaviour {
 				Instantiate(Resources.Load("TrapBall"), new Vector3(17.5f, 25f, 0), Quaternion.identity);
 				break;
 			case 2:
-				
+				Instantiate(Resources.Load("Arrow Dispenser"), new Vector3(30, 17, 0), Quaternion.identity);
 				break;
 			}
 			
