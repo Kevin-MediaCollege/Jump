@@ -1213,6 +1213,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1240528344}
   - 65: {fileID: 1240528343}
+  - 114: {fileID: 1240528345}
   m_Layer: 0
   m_Name: Trigger1
   m_TagString: Untagged
@@ -1244,6 +1245,19 @@ Transform:
   m_LocalScale: {x: 1, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1240528345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d63d98fab8ce8674b8e37af69ec1abeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1581875982}
+  m_GameObject: {fileID: 1240528342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9440286f6cb18f44f99dc52781d71a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1001 &1242261995
 Prefab:
   m_ObjectHideFlags: 0
@@ -1768,6 +1782,10 @@ Prefab:
       value: Trigger1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d63d98fab8ce8674b8e37af69ec1abeb, type: 2}
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}

@@ -1,29 +1,68 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player:MonoBehaviour 
-{
+public class Player:MonoBehaviour {
 	private int walkSpeed = 10;
 	private int jumpSpeed = 30;
 	
-	private bool onGround;
-	
-	private GameObject cam;
-	private bool drawing;
-	private bool down;
 	private GameObject line;
-	private float pos1x;
-	private float pos1y;
-	private float pos2x;
-	private float pos2y;
+	private GameObject cam;
+	
+	private bool isDrawing;
+	private bool onGround;
+	private bool isDown;
+	
+	private float startX;
+	private float startY;
+	private float endX;
+	private float endY;
 	
 	void Start() {
 		cam = GameObject.Find("Main Camera");
 	}
 	
-	void FixedUpdate() {
-		drawCheck();
+	void Update() {
+		if(Input.GetMouseButtonDown(0)) {
+			isDown = true;
+		} else if(Input.GetMouseButtonUp(0)) {
+			isDown = false;
+		}
 		
+		if (isDown && !isDrawing) {
+			isDrawing = true;
+			
+			Vector3 position = cam.camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+			startX = position.x;
+			startY = position.y;
+			
+			line = Instantiate(Resources.Load("Line"), transform.position, Quaternion.identity) as GameObject;	
+			line.name = "Line";
+		}
+		
+		if(isDrawing) {
+			Vector3 position = cam.camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+			
+			endX = position.x;
+			endY = position.y;
+			
+			if (!isDown) { 
+				isDrawing = false;
+			}
+			
+			float distance = getDistance(startX, startY, endX, endY);
+			float degree = getDegreeFromPoint(startX, startY, endX, endY);
+			float newX = getNextX(startX, degree, distance / 2f);
+			float newY = getNextY(startY, degree, distance / 2f);
+			
+			Vector3 pos = new Vector3(newX, newY, 0);
+			line.transform.position = pos;
+			Vector3 scl = new Vector3(distance, 0.5f, 1f);
+			line.transform.localScale = scl;
+			line.transform.localEulerAngles = new Vector3(0f, 0f, degree);
+		}
+	}
+	
+	void FixedUpdate() {
 		Vector3 speed = new Vector3(0, rigidbody.velocity.y - 1, 0);
 		
 		if(Input.GetKey("d")) {
@@ -50,7 +89,7 @@ public class Player:MonoBehaviour
 	
 	void OnCollisionStay(Collision collision) {
 		if(collision.contacts[0].normal.y > 0.7f) {
-			if(collision.collider.name == "Floor") {
+			if(collision.collider.name == "Floor" || collision.collider.name == "Line") {
 				onGround = true;
 			}
 		}
@@ -58,47 +97,6 @@ public class Player:MonoBehaviour
 	
 	void OnCollisionExit(Collision collision) {
 		onGround = false;
-	}
-	
-	void drawCheck() {
-		if(Input.GetMouseButtonDown(0)) {
-			down = true;
-		}
-		if(Input.GetMouseButtonUp(0)) {
-			down = false;
-		}
-		
-		if (down && !drawing) {
-			drawing = true;
-			
-			Vector3 p = cam.camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-			pos1x = p.x;
-			pos1y = p.y;
-			
-			line = Instantiate(Resources.Load("Line"), transform.position, Quaternion.identity) as GameObject;	
-			line.name = "Line";
-		}
-		
-		if(drawing) {
-			Vector3 p = cam.camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
-			pos2x = p.x;
-			pos2y = p.y;
-			
-			if (!down) { 
-				drawing = false;
-			}
-			
-			float distance = getDistance(pos1x, pos1y, pos2x, pos2y);
-			float degree = getDegreeFromPoint(pos1x, pos1y, pos2x, pos2y);
-			float newX = getNextX(pos1x, degree, distance / 2f);
-			float newY = getNextY(pos1y, degree, distance / 2f);
-			
-			Vector3 pos = new Vector3(newX, newY, 0);
-			line.transform.position = pos;
-			Vector3 scl = new Vector3(distance, 1f, 1f);
-			line.transform.localScale = scl;
-			line.transform.localEulerAngles = new Vector3(0f, 0f, degree);
-		}
 	}
 	
 	float getNextX(float x, float d, float s) {
