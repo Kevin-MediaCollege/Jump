@@ -18,7 +18,9 @@ public class Player:MonoBehaviour {
 	private float endY;
 	
 	private GameObject[] lines;
-	private int maxlines = 5;
+	private int maxlines = 3;
+	
+	private int animpos;
 	
 	void Start() {
 		lines = new GameObject[maxlines + 1];
@@ -26,6 +28,21 @@ public class Player:MonoBehaviour {
 	}
 	
 	void Update() {
+		int animX = animpos;
+		int animY = 0;
+		
+		while(animX > 3) {
+			animX -= 4;
+			animY++;
+		}
+		
+		renderer.material.mainTextureOffset = new Vector2(animX * 0.25f, animY * 0.1111f);
+		
+		animpos++;
+		if(animpos > 34) {
+			animpos = 0;
+		}		
+		
 		if(Input.GetMouseButtonDown(0)) {
 			isDown = true;
 		} else if(Input.GetMouseButtonUp(0)) {
@@ -62,6 +79,11 @@ public class Player:MonoBehaviour {
 			}
 			
 			float distance = getDistance(startX, startY, endX, endY);
+			if(distance > 10f)
+			{
+				distance = 10f;
+			}	
+			
 			float degree = getDegreeFromPoint(startX, startY, endX, endY);
 			float newX = getNextX(startX, degree, distance / 2f);
 			float newY = getNextY(startY, degree, distance / 2f);
