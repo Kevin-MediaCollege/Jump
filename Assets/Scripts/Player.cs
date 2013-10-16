@@ -17,7 +17,11 @@ public class Player:MonoBehaviour {
 	private float endX;
 	private float endY;
 	
+	private GameObject[] lines;
+	private int maxlines = 5;
+	
 	void Start() {
+		lines = new GameObject[maxlines + 1];
 		cam = GameObject.Find("Main Camera");
 	}
 	
@@ -37,6 +41,15 @@ public class Player:MonoBehaviour {
 			
 			line = Instantiate(Resources.Load("Line"), transform.position, Quaternion.identity) as GameObject;	
 			line.name = "Line";
+			lines[maxlines] = line;
+			Destroy(lines[0]);
+			
+			for(int i = 1; i < maxlines + 1; i++)
+			{
+				lines[i - 1] = lines[i];
+			}
+			
+			lines[maxlines] = null;
 		}
 		
 		if(isDrawing) {
