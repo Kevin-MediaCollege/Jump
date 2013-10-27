@@ -13,14 +13,22 @@ public class PressurePlate:MonoBehaviour {
 			if(uses > 0 || uses == -1) {
 				switch(type) {
 				case 1:
-					Instantiate(Resources.Load("TrapBall"), new Vector3(17.5f, 25f, 0), Quaternion.identity);
+					Instantiate(Resources.Load("Arrow"), new Vector3(-13, 25, 0), new Quaternion(0, 0, 180, 1));
+					Instantiate(Resources.Load("Arrow"), new Vector3(-13, 26, 0), new Quaternion(0, 0, 180, 1));
+					Instantiate(Resources.Load("Arrow"), new Vector3(-13, 27, 0), new Quaternion(0, 0, 180, 1));
+					Instantiate(Resources.Load("Arrow"), new Vector3(-13, 28, 0), new Quaternion(0, 0, 180, 1));
+					Instantiate(Resources.Load("Arrow"), new Vector3(-13, 29, 0), new Quaternion(0, 0, 180, 1));
+					
+					Instantiate(Resources.Load("TrapBall"), new Vector3(13.4f, 44.9f, 0), Quaternion.identity);
 					break;
 				case 2:
-					Instantiate(Resources.Load("Arrow"), new Vector3(29.4f, 17.1f, 0), Quaternion.identity);
+					Instantiate(Resources.Load("TrapBall"), new Vector3(13.4f, 12.9f, 0), Quaternion.identity);
 					break;
 				}
 				
-				uses--;
+				if(uses != -1) {
+					uses--;
+				}
 			}
 		}
 	}
