@@ -93,7 +93,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe72ac19ee8aeb840b7312debfc6bed6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  sound_drawStart: {fileID: 8300000, guid: ab632dc3bded1564daca97289447f41d, type: 3}
+  sound_drawEnd: {fileID: 8300000, guid: a5ad25dcc2fa83547876e91db01f516c, type: 3}
+  sound_jump: {fileID: 8300000, guid: b9b5e4e1dbab5894ba8771701c2ea28e, type: 3}
+  soundtrack: {fileID: 8300000, guid: 7dbc2566d76c35242bc7ebcdb15f3fcc, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

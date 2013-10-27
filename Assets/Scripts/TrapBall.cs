@@ -4,11 +4,16 @@ using System.Collections;
 public class TrapBall:MonoBehaviour {
 	public int direction;
 	
+	private GameObject cam;
+	
 	private int rollingSpeed = 5;
 	private bool onGround;
 	
+	public AudioClip sound_hit;
+	
 	void Start() {
 		gameObject.name = "TrapBall";	
+		cam = GameObject.Find("Main Camera");
 	}
 		
 	void FixedUpdate() {
@@ -31,6 +36,7 @@ public class TrapBall:MonoBehaviour {
 		}
 		
 		if(collision.collider.name == "Player") {
+			AudioSource.PlayClipAtPoint(sound_hit, cam.camera.transform.position);
 			Destroy(collision.collider.gameObject);
 			Application.LoadLevel(0);
 		}

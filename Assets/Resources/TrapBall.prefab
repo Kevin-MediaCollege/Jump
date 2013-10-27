@@ -144,8 +144,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e091d75d79134e44a98f06ab39b6af13, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
   direction: -1
+  sound_hit: {fileID: 8300000, guid: 540f6040b0c6a5047aa4c7c6a1c6afed, type: 3}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

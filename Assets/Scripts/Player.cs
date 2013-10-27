@@ -17,12 +17,19 @@ public class Player:MonoBehaviour {
 	private float endX;
 	private float endY;
 	
+	public AudioClip sound_drawStart;
+	public AudioClip sound_drawEnd;
+	public AudioClip sound_jump;
+	public AudioClip soundtrack;
+	
 	private GameObject[] lines;
 	private int maxlines = 3;
 	
 	void Start() {
 		lines = new GameObject[maxlines + 1];
 		cam = GameObject.Find("Main Camera");
+		
+		AudioSource.PlayClipAtPoint(soundtrack, cam.camera.transform.position);
 	}
 	
 	void Update() {
@@ -38,6 +45,8 @@ public class Player:MonoBehaviour {
 			Vector3 position = cam.camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
 			startX = position.x;
 			startY = position.y;
+			
+			AudioSource.PlayClipAtPoint(sound_drawStart, cam.camera.transform.position);
 			
 			line = Instantiate(Resources.Load("Line"), transform.position, Quaternion.identity) as GameObject;	
 			line.name = "Line";
@@ -58,6 +67,7 @@ public class Player:MonoBehaviour {
 			endY = position.y;
 			
 			if (!isDown) { 
+				AudioSource.PlayClipAtPoint(sound_drawEnd, cam.camera.transform.position);
 				isDrawing = false;
 			}
 			
@@ -97,6 +107,7 @@ public class Player:MonoBehaviour {
 		}
 			
 		if(Input.GetKey("space") && onGround) {
+			AudioSource.PlayClipAtPoint(sound_jump, cam.camera.transform.position);
 			speed.y = jumpSpeed;
 			onGround = false;
 		}
