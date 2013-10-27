@@ -9,7 +9,6 @@ public class Arrow:MonoBehaviour {
 	}
 	
 	void FixedUpdate() {
-		transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, -90, transform.rotation.w);
 		rigidbody.velocity = new Vector3(-moveSpeed, 0, 0);
 	}
 	
@@ -19,6 +18,6 @@ public class Arrow:MonoBehaviour {
 			Application.LoadLevel(0);
 		}
 		
-		//Destroy(gameObject);
+		Destroy(gameObject);
 	}
 }
