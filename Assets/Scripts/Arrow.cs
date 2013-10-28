@@ -2,17 +2,15 @@
 using System.Collections;
 
 public class Arrow:MonoBehaviour {
+	public int direction;
+	
 	private int moveSpeed = 5;
 	
-	void Start() {
-		gameObject.name = "Arrow";	
-	}
-	
 	void FixedUpdate() {
-		if(transform.rotation.z > 90 && transform.rotation.z < 270) {
-			rigidbody.velocity = new Vector3(-moveSpeed, 0, 0);
-		} else {
+		if(direction > 0) {
 			rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
+		} else if(direction < 0) {
+			rigidbody.velocity = new Vector3(-moveSpeed, 0, 0);
 		}
 	}
 	

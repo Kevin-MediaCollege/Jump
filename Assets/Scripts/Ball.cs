@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrapBall:MonoBehaviour {
+public class Ball:MonoBehaviour {
 	public int direction;
 	
 	private GameObject cam;
@@ -12,7 +12,6 @@ public class TrapBall:MonoBehaviour {
 	public AudioClip sound_hit;
 	
 	void Start() {
-		gameObject.name = "TrapBall";	
 		cam = GameObject.Find("Main Camera");
 	}
 		
@@ -39,6 +38,8 @@ public class TrapBall:MonoBehaviour {
 			AudioSource.PlayClipAtPoint(sound_hit, cam.camera.transform.position);
 			Destroy(collision.collider.gameObject);
 			Application.LoadLevel(0);
+		} else if(collision.collider.name == "Wall") {
+			Destroy(gameObject);	
 		}
 	}
 }
